@@ -2,3 +2,5 @@ spring:
   application:
     name: springstudy
 
+server:
+  port: 9090
