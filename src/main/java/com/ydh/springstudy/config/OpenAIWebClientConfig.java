@@ -13,7 +13,7 @@ public class OpenAIWebClientConfig {
     @Bean
     public WebClient OpenAIwebClient(WebClient.Builder builder) {
         String url = "https://oai-demo-canada.openai.azure.com/";
-        String apikey = "********************";
+        String apikey = System.getenv("OPENAI_API_KEY");
         return builder
                 .baseUrl(url) // 호출할 API 서비스 도메인 URL
                 .defaultHeaders(httpHeaders -> {
