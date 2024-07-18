@@ -21,7 +21,7 @@ class WebFluxController {
     @GetMapping({"/mono/{val}",
                 "/mono"})
     public Mono<String> getMono(@PathVariable(required = false) String val) {
-        if(val == null) {
+        if(val == null) { // val가 null이면, Hello WebFlux
             System.out.println(this.str);
             return Mono.just(this.str);
         }
