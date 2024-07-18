@@ -20,7 +20,7 @@ import reactor.core.publisher.Mono;
 import static reactor.core.publisher.Flux.fromStream;
 
 @RestController
-@RequestMapping("/api/v1/flux")
+@RequestMapping("/flux")
 public class FluxController {
 
     @GetMapping("/just")

@@ -12,7 +12,7 @@ import com.ydh.springstudy.Service.OpenAIService;
 import reactor.core.publisher.Mono;
 
 @RestController
-@RequestMapping("/api/v1/openai")
+@RequestMapping("/openai")
 public class OpenAIController {
 
     private final OpenAIService openAIService;
