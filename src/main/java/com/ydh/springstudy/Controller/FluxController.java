@@ -2,16 +2,21 @@ package com.ydh.springstudy.Controller;
 
 import java.time.Duration;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import static reactor.core.publisher.Flux.fromStream;
 
 @RestController
@@ -71,4 +76,42 @@ public class FluxController {
             else emitter.error(new RuntimeException("Bad luck, you had one change out of 2 to complete Flux"));
         });
     }
+
+    class Product {
+        private String name;
+        private int amount ;
+
+        // Constructor
+        public Product() {
+            this.name = "Unknown";
+            this.amount = 0;
+        }
+
+        public Product(String name, int amount) {
+            this.name = name;
+            this.amount = amount;
+        }
+
+        // Getters: Used when Jackson Serialize
+        public String getName() {
+            return name;
+        }
+
+        public double getamount() {
+            return amount;
+        }
+
+    }
+
+    @GetMapping("/convertmono")
+    public Flux<Product> getConvertMono() {
+        System.out.println("flatMapIterable!");
+        Map<Integer, List<Product>> mp = new HashMap<>();
+        mp.put(1, Arrays.asList(new Product(), new Product("a",2), new Product("b",3)));
+        mp.put(2, Arrays.asList(new Product("x", 10), new Product("y",11), new Product("z",12)));
+
+        Mono<Map<Integer, List<Product>>> monoWithMap = Mono.just(mp);
+        return monoWithMap.flatMapIterable(m -> m.get(1));
+    }
+
 }
