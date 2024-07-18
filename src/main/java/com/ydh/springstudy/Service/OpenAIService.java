@@ -9,15 +9,20 @@ import org.springframework.web.reactive.function.client.WebClient;
 import com.ydh.springstudy.payload.OpenAIRequest;
 import com.ydh.springstudy.payload.OpenAIResponse;
 
+import lombok.AllArgsConstructor;
 import reactor.core.publisher.Mono;
 
+@AllArgsConstructor
 @Service
 public class OpenAIService {
     private final WebClient openAIWebClient;
 
+    /*
+    //lombok:AllArgsConstructor으로 대체 가능
     public OpenAIService(WebClient openAIwebClient) {
         this.openAIWebClient = openAIwebClient;
     }
+    */
 
     public Mono<String> chatService(String question) {
         /*

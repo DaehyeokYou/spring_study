@@ -10,46 +10,20 @@ package com.ydh.springstudy.payload;
    }
  */
 
-import java.util.ArrayList;
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class OpenAIRequest {
     private List<Message> messages;
 
-    // Getters and Setters
-    public List<Message> getMessages() {
-        return messages;
-    }
-
-    public void setMessages(List<Message> messages) {
-        this.messages = messages;
-    }
-
+    @Getter
+    @Setter
     public static class Message {
-        private String role = "user";
-        private String content = "hi";
-
-        public Message() { }
-
-        public Message(String content) {
-            this.content = content;
-        }
-        // Getters and Setters
-        public String getRole() {
-            return role;
-        }
-
-        public void setRole(String role) {
-            this.role = role;
-        }
-
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
+        private String role;
+        private String content;
     }
-
 }

@@ -9,20 +9,22 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ydh.springstudy.Service.OpenAIService;
 
+import lombok.AllArgsConstructor;
 import reactor.core.publisher.Mono;
 
+@AllArgsConstructor
 @RestController
 @RequestMapping("/openai")
 public class OpenAIController {
 
     private final OpenAIService openAIService;
-
-    // final 변수는 꼭! Constructor injection (lombok으로 대체 가능)
+    /*
+    // final 변수는 꼭! Constructor injection (lombok:AllArgsConstructor)으로 대체 가능)
     @Autowired
     public OpenAIController(OpenAIService openAIService) {
         this.openAIService = openAIService;
     }
-
+    */
     @GetMapping("/chat/{question}")
     public Mono<String> getChat(@PathVariable String question) {
         return openAIService.chatService(question);

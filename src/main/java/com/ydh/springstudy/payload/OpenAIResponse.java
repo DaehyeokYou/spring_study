@@ -2,6 +2,9 @@ package com.ydh.springstudy.payload;
 
 import java.util.List;
 
+import lombok.Getter;
+import lombok.Setter;
+
 /*
 {
     "choices": [
@@ -35,41 +38,20 @@ import java.util.List;
     ],
 }
 */
+@Getter
+@Setter
 public class OpenAIResponse {
     private List<Choice> choices;
 
-    // Getter 및 Setter
-    public List<Choice> getChoices() {
-        return choices;
-    }
-
-    public void setChoices(List<Choice> choices) {
-        this.choices = choices;
-    }
-
+    @Getter
+    @Setter
     public static class Choice {
         private Message message;
-
-        // Getter 및 Setter
-        public Message getMessage() {
-            return message;
-        }
-
-        public void setMessage(Message message) {
-            this.message = message;
-        }
     }
 
+    @Getter
+    @Setter
     public static class Message {
         private String content;
-
-        // Getter 및 Setter
-        public String getContent() {
-            return content;
-        }
-
-        public void setContent(String content) {
-            this.content = content;
-        }
     }
 }
