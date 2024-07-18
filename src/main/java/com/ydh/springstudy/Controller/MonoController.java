@@ -2,6 +2,7 @@ package com.ydh.springstudy.Controller;
 
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.function.Supplier;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,5 +57,33 @@ public class MonoController {
     @GetMapping("/fromFlux")
     public Mono<Integer> getMonoFromFlux() {
         return Mono.from(Flux.range(2,10));
+    }
+
+    Integer getAnyInteger() throws Exception {
+        throw new RuntimeException("An error as occured for no reason");
+    }
+    @GetMapping("/defer")
+    public void getDefer() {
+        //두 메서드의 비교
+        Mono<Integer> fromCallable = Mono.fromCallable(this::getAnyInteger);
+        // result -> Mono.error(RuntimeException("An error as occured for no reason."))
+
+        Mono<Integer> defer = Mono.defer(() -> {
+            try {
+                Integer res = this.getAnyInteger();
+                return Mono.just(res);
+            } catch (Exception e) {
+                return Mono.error(e);
+            }
+        });
+        // result -> Mono.error(RuntimeException("An error as occured for no reason"))
+    }
+
+    @GetMapping("/create")
+    public Mono<Integer> getCreate() {
+        return Mono.create(callback -> {
+            try { callback.success(this.getAnyInteger()); }
+            catch (Exception e) { callback.error(e); }
+        });
     }
 }

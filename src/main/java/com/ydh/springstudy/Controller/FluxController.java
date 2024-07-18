@@ -3,6 +3,7 @@ package com.ydh.springstudy.Controller;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Stream;
 
@@ -55,5 +56,19 @@ public class FluxController {
     @GetMapping("/fromFlux")
     public Flux<String> getFluxFromFlux() {
         return Flux.from(Flux.just("i", "am", "flux"));
+    }
+
+    @GetMapping("/create")
+    public Flux<Double> getCreate() {
+        return Flux.create(emitter -> {
+            Random rnd = new Random();
+            for(int i = 0; i <= 10; i++)
+                emitter.next(rnd.nextDouble());
+
+            int random = rnd.nextInt(2);
+
+            if(random < 1) emitter.complete();
+            else emitter.error(new RuntimeException("Bad luck, you had one change out of 2 to complete Flux"));
+        });
     }
 }
