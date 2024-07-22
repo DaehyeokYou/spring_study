@@ -1,28 +1,26 @@
 package com.ydh.springstudy.Service;
 
-import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import com.ydh.springstudy.payload.OpenAIRequest;
 import com.ydh.springstudy.payload.OpenAIResponse;
 
-import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import reactor.core.publisher.Mono;
 
-@AllArgsConstructor
+
 @Service
 public class OpenAIService {
     private final WebClient openAIWebClient;
 
-    /*
-    //lombok:AllArgsConstructor으로 대체 가능
-    public OpenAIService(WebClient openAIwebClient) {
+    public OpenAIService(@Qualifier("OpenAIWebClient") WebClient openAIwebClient) {
         this.openAIWebClient = openAIwebClient;
     }
-    */
+
 
     private OpenAIRequest createOpenAIRequest(String question) {
         OpenAIRequest payload = new OpenAIRequest();

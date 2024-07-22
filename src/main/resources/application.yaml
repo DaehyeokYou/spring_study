@@ -9,5 +9,8 @@ cortex:
   url: http://localhost:9091/
   apikey: ${CORTEX_API_KEY}
 
+openai:
+  url: https://oai-demo-canada.openai.azure.com/
+  apikey: ${OPENAI_API_KEY}
 
 

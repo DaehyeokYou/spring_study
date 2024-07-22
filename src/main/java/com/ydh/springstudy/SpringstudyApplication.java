@@ -9,7 +9,7 @@ import com.ydh.springstudy.config.OpenAIProperties;
 import com.ydh.springstudy.config.OpenAIWebClientConfig;
 
 @SpringBootApplication
-@EnableConfigurationProperties({CortexProperties.class})
+@EnableConfigurationProperties({CortexProperties.class, OpenAIProperties.class})
 public class SpringstudyApplication {
 	/*
 	flatMapIterable
