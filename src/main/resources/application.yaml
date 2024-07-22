@@ -4,3 +4,10 @@ spring:
 
 server:
   port: 9090
+
+cortex:
+  url: http://localhost:9091/
+  apikey: ${CORTEX_API_KEY}
+
+
+
